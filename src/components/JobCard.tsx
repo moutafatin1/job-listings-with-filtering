@@ -2,9 +2,10 @@ import { companies } from "../data";
 
 type JobCardProps = {
   job: (typeof companies)[number];
+  addFilter: (filter: string) => void;
 };
 
-export const JobCard = ({ job }: JobCardProps) => {
+export const JobCard = ({ job, addFilter }: JobCardProps) => {
   return (
     <article className="relative flex w-full max-w-5xl flex-col rounded-md border-l-4 border-l-primary bg-white px-6 py-8 font-spartan shadow-lg md:flex-row md:items-center md:justify-between">
       <div className="flex items-center gap-4">
@@ -34,9 +35,9 @@ export const JobCard = ({ job }: JobCardProps) => {
           </p>
           <p className="flex  items-center gap-2 font-medium text-neutral-darkGrayishCyan">
             <span className="shrink-0">{job.postedAt}</span>
-            <div className="h-1 w-1 shrink-0 rounded-full bg-gray-300"></div>
+            <span className="h-1 w-1 shrink-0 rounded-full bg-gray-300"></span>
             <span className="shrink-0">{job.contract}</span>
-            <div className="h-1 w-1 shrink-0 rounded-full bg-gray-300"></div>
+            <span className="h-1 w-1 shrink-0 rounded-full bg-gray-300"></span>
             <span className="shrink-0"> {job.location}</span>
           </p>
         </div>
@@ -46,7 +47,7 @@ export const JobCard = ({ job }: JobCardProps) => {
         {[...job.languages, ...job.tools, job.level, job.role].map((tag) => (
           <li key={tag}>
             <button
-              onClick={() => alert(tag)}
+              onClick={() => addFilter(tag)}
               className="rounded-md bg-neutral-background px-2 pt-1  text-sm font-bold text-primary transition hover:bg-primary hover:text-white md:text-base"
             >
               {tag}
